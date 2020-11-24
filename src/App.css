@@ -1,2 +1,14 @@
 .App {
 }
+
+.Header {
+}
+
+.Header nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Header nav a {
+  padding: 10px;
+}
