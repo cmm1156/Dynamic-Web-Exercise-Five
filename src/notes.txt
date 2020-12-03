@@ -6,3 +6,6 @@
 6. Add web app to Firebase (settings -> general -> add app)
 7. Copy firebase config to code as variable
 8. Put API key in env
+
+
+Netlify production url: https://frosty-elion-eb985a.netlify.app/login
