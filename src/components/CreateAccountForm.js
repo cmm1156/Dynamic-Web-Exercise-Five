@@ -1,10 +1,10 @@
 import React from "react";
-import CreateAccountFunction from "../App.js";
 
 // This function is a piece of the webpage
 // Think the function like an image that can be inserted into the page
 // the CreateAccountFunction is in App.js and is the backend function that sends the email and password to Firebase
-function CreateAccountForm() {
+function CreateAccountForm({ CreateAccountFunction }) {
+  // ** FIXED THE ISSUE 12/3/2020 : ^^^ CreateAccountFunction was missing as prop
   return (
     <div>
       <form className="SignupForm" onSubmit={(e) => CreateAccountFunction(e)}>

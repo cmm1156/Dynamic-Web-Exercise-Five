@@ -1,30 +1,27 @@
+// these are Hooks being imported from the react package we downloaded with 'create-react-app'
+// a Hook is a special function that lets you "hook into" React features; this is what makes React more powerful than regular JavaScript
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import firebase from "firebase/app"; // names everything that imports from the firebase/app package as 'firebase'
 import "firebase/auth";
 
+/* Hooks:
+useState is a Hook that lets you add React state to function components
+useEffect is a Hook that runs every time the state of the element in the dependency array changes
+*/
+
 // Styles
 import "./App.css"; // use . if the desired file is in the same root folder as this current one
 // App.css is in the same folder location as this App.js file
 
-// Pages
+// Pages (containers)
 import Login from "./containers/Login";
 import CreateAccount from "./containers/CreateAccount";
 import UserProfile from "./containers/UserProfile";
 // Components
 import Header from "./components/Header";
 
-// const firebaseConfig = {
-//   apiKey: process.env.REACT_APP_FIREBASE_APIKEY, // Replace API key with your .env file API reference
-//   authDomain: "exercise-five-bd520.firebaseapp.com",
-//   databaseURL: "https://exercise-five-bd520.firebaseio.com",
-//   projectId: "exercise-five-bd520",
-//   storageBucket: "exercise-five-bd520.appspot.com",
-//   messagingSenderId: "1310410361",
-//   appId: "1:1310410361:web:8c3505b72eccd1b7f8b6a8",
-// };
-
-// Your web app's Firebase configuration
+// My web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: "exercise-five-bd520.firebaseapp.com",
@@ -39,13 +36,14 @@ const firebaseConfig = {
 // Initialize Firebase
 // firebase.initializeApp(firebaseConfig);
 
+// this function is the App
 function App() {
+  // define variables to be used below
   const [loggedIn, setLoggedIn] = useState(false); // boolean to determine if logged in or not
   const [loading, setLoading] = useState(true); // is page loading?
   const [userInformation, setUserInformation] = useState({});
 
   // Ensure app is initialized when it is ready
-
   useEffect(() => {
     // If firebase is not already initialized
     // if there are no firebase apps in the array of apps on your firebase config / account, initialize the app
@@ -54,13 +52,13 @@ function App() {
       // Initializes firebase
       firebase.initializeApp(firebaseConfig);
     }
-    // console.log("firebase initialized");
+    console.log("firebase initialized");
   }, [firebaseConfig]);
 
-  // check to see if use is logged in...
+  // Check to see if use is logged in...
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
-      // console.log({ user });
+      console.log({ user });
       if (user) {
         // User is logged in
         setLoggedIn(true);
@@ -128,7 +126,7 @@ function App() {
       });
   }
 
-  // console.log({ loggedIn, loading });
+  console.log({ loggedIn, loading });
   // COMPONENTS are like an image or div on a page
   // CONTAINERS are the pages themselves
   // this entire codebase uses small chunks of code (components / containers) to be clear and concise
