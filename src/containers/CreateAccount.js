@@ -8,6 +8,8 @@ function CreateAccount({ CreateAccountFunction }) {
     <div>
       <h1>Create Account</h1>
       <CreateAccountForm CreateAccountFunction={CreateAccountFunction} />
+      {/*CreateAccountFunction is a variable?
+       *This is very similar to UserProfile.js. It is just passing down the prop to the CreateAccountForm */}
     </div>
   );
 }

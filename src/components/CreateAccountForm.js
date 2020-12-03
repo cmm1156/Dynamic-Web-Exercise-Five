@@ -13,6 +13,7 @@ function CreateAccountForm() {
 
         <label htmlFor="createPassword">Password</label>
         <input type="password" name="createPassword" />
+
         <button>Submit</button>
       </form>
     </div>

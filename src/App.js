@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
-import firebase from "firebase/app"; // import everything as firebase
+import firebase from "firebase/app"; // names everything that imports from the firebase/app package as 'firebase'
 import "firebase/auth";
 
 // Styles
@@ -14,27 +14,47 @@ import UserProfile from "./containers/UserProfile";
 // Components
 import Header from "./components/Header";
 
+// const firebaseConfig = {
+//   apiKey: process.env.REACT_APP_FIREBASE_APIKEY, // Replace API key with your .env file API reference
+//   authDomain: "exercise-five-bd520.firebaseapp.com",
+//   databaseURL: "https://exercise-five-bd520.firebaseio.com",
+//   projectId: "exercise-five-bd520",
+//   storageBucket: "exercise-five-bd520.appspot.com",
+//   messagingSenderId: "1310410361",
+//   appId: "1:1310410361:web:8c3505b72eccd1b7f8b6a8",
+// };
+
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_APIKEY, // replace API key with .env file reference
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: "exercise-five-bd520.firebaseapp.com",
   databaseURL: "https://exercise-five-bd520.firebaseio.com",
   projectId: "exercise-five-bd520",
   storageBucket: "exercise-five-bd520.appspot.com",
   messagingSenderId: "1310410361",
-  appId: "1:1310410361:web:8c3505b72eccd1b7f8b6a8",
+  appId: "1:1310410361:web:b4916750ce0bc669f8b6a8",
 };
+
+// Don't do this, you do not want to initialize app every time the website loads
+// Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false); // boolean to determine if logged in or not
   const [loading, setLoading] = useState(true); // is page loading?
   const [userInformation, setUserInformation] = useState({});
 
+  // Ensure app is initialized when it is ready
+
   useEffect(() => {
     // If firebase is not already initialized
+    // if there are no firebase apps in the array of apps on your firebase config / account, initialize the app
     if (!firebase.apps.length) {
+      // this takes from the package we named 'firebase' on line 3
       // Initializes firebase
       firebase.initializeApp(firebaseConfig);
     }
+    // console.log("firebase initialized");
   }, [firebaseConfig]);
 
   // check to see if use is logged in...
@@ -44,7 +64,7 @@ function App() {
       if (user) {
         // User is logged in
         setLoggedIn(true);
-        setUserInformation(user);
+        setUserInformation(user); // user is an filled object {}
       } else {
         setLoggedIn(false);
       }
@@ -79,7 +99,7 @@ function App() {
       .signOut()
       .then(function () {
         setLoggedIn(false);
-        setUserInformation();
+        setUserInformation({}); // If user logs out, I want to clear the user information with the empty {} object
       })
       .catch(function (error) {
         console.log("LOGOUT ERROR", error);
@@ -87,11 +107,14 @@ function App() {
   }
 
   // Function for creating an account
+  // this is basically the same as LoginFunction, but it uses the .createUserWithEmailAndPassword(arg1,arg2) method instead of .signIn...() method
+  // SEE Firebase documentation for the login and create account methods
   function CreateAccountFunction(e) {
     // what will run when you create an account...
     e.preventDefault();
-    const email = e.currentTarget.createEmail.value;
-    const password = e.currentTarget.createPassword.value;
+    const email = e.currentTarget.createEmail.value; // .createEmail is the name of the input, SEE CreateAccountForm htmlFor='createEmail'
+    const password = e.currentTarget.createPassword.value; // SEE CreateAccountForm name='createPassword'
+    // password variable will take data from the input that I set 'createPassword' with name='createPassword'
 
     firebase
       .auth()
@@ -105,7 +128,10 @@ function App() {
       });
   }
 
-  console.log({ loggedIn, loading });
+  // console.log({ loggedIn, loading });
+  // COMPONENTS are like an image or div on a page
+  // CONTAINERS are the pages themselves
+  // this entire codebase uses small chunks of code (components / containers) to be clear and concise
 
   if (loading) return null;
 
@@ -114,7 +140,9 @@ function App() {
       <Header loggedIn={loggedIn} LogoutFunction={LogoutFunction} />
       <Router>
         <Route exact path="/login">
-          {/* If someone is logged in, do not take them to login page - take them to User Profile */}
+          {/* If someone is logged in, do not take them to login page - take them to User Profile
+          this is an if/else statement. If not logged in, the login container will show on the page,
+          if already logged in, the website will redirect the user to the main page */}
           {!loggedIn ? (
             <Login LoginFunction={LoginFunction} />
           ) : (
@@ -135,6 +163,7 @@ function App() {
             <Redirect to="/login" />
           ) : (
             <UserProfile userInformation={userInformation} />
+            /* userInformation is a variable of the user object */
           )}
         </Route>
       </Router>

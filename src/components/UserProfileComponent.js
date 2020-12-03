@@ -9,6 +9,9 @@ function UserProfileComponent({ userInformation }) {
       <p>
         <strong>Email:</strong> {userInformation.email}
       </p>
+      {/* <p>
+        <strong>Display Name:</strong> {userInformation.displayName}
+      </p> */}
     </div>
   );
 }

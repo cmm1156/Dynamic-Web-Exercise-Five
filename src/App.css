@@ -1,7 +1,11 @@
 .App {
+  margin-left: 200px;
+  margin-right: 200px;
 }
 
 .Header {
+  max-width: 1040px;
+  margin: 0 auto;
 }
 
 .Header nav {
@@ -27,5 +31,6 @@
 .SignupForm input,
 .SignupForm button {
   margin-bottom: 30px;
-  max-width: 300px;
+  max-width: 400px;
+  width: 100%;
 }

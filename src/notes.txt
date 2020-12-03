@@ -1,0 +1,8 @@
+1. Login to Firebase
+2. Create new proejct (exercise five)
+3. Add Firebase package to create react app (npm install firebase)
+4. Enable Authentication on Firebase and allow email/password
+5. Add Firebase packge into App.js
+6. Add web app to Firebase (settings -> general -> add app)
+7. Copy firebase config to code as variable
+8. Put API key in env
