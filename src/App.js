@@ -52,13 +52,12 @@ function App() {
       // Initializes firebase
       firebase.initializeApp(firebaseConfig);
     }
-    console.log("firebase initialized");
+    console.log("Firebase Initialized");
   }, [firebaseConfig]);
 
   // Check to see if use is logged in...
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
-      console.log({ user });
       if (user) {
         // User is logged in
         setLoggedIn(true);
@@ -126,7 +125,6 @@ function App() {
       });
   }
 
-  console.log({ loggedIn, loading });
   // COMPONENTS are like an image or div on a page
   // CONTAINERS are the pages themselves
   // this entire codebase uses small chunks of code (components / containers) to be clear and concise
